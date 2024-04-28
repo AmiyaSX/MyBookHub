@@ -1,4 +1,4 @@
-package com.example.mybookhub.ui.vm
+package com.example.mybookhub.data.vm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

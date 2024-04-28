@@ -1,10 +1,6 @@
 package com.example.mybookhub.data.db
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.example.mybookhub.bean.Note
 import kotlinx.coroutines.flow.Flow
 
@@ -12,6 +8,9 @@ import kotlinx.coroutines.flow.Flow
 interface NoteDao {
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(note: Note)
+
+    @Update
+    suspend fun update(note: Note)
 
     @Delete
     suspend fun delete(note: Note)

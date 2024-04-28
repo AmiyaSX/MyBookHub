@@ -24,8 +24,8 @@ import com.example.mybookhub.data.*
 import com.example.mybookhub.data.db.AppDatabase
 import com.example.mybookhub.databinding.FragmentBookDetailBinding
 import com.example.mybookhub.ui.adapter.BookDetailAdapter
-import com.example.mybookhub.ui.vm.BookDetailViewModel
-import com.example.mybookhub.ui.vm.NotesViewModel
+import com.example.mybookhub.data.vm.BookDetailViewModel
+import com.example.mybookhub.data.vm.NotesViewModel
 
 class BookDetailFragment : Fragment() {
 

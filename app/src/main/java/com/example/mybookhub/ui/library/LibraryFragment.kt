@@ -8,58 +8,38 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.example.mybookhub.R
 import com.example.mybookhub.bean.LibraryBook
 import com.example.mybookhub.bean.Note
-import com.example.mybookhub.ui.vm.LibraryViewModel
-import com.example.mybookhub.ui.vm.NotesViewModel
+import com.example.mybookhub.data.vm.LibraryViewModel
+import com.example.mybookhub.data.vm.NotesViewModel
 import com.example.mybookhub.ui.adapter.LibraryAdapter
+import com.example.mybookhub.ui.adapter.LibraryPagerAdapter
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class LibraryFragment : Fragment(R.layout.fragment_library) {
     private val tag: String = "LibraryFragment"
-    private val viewModel: LibraryViewModel by viewModels()
-    private val notesViewModel: NotesViewModel by viewModels()
 
-    private lateinit var books: List<LibraryBook>
-    private var notes: MutableList<Note> = mutableListOf()
-
-    private val libraryAdapter = LibraryAdapter(emptyList(), ::onLibraryBookClick)
-    private  lateinit var libraryRecyclerView: RecyclerView
+    private lateinit var viewPager: ViewPager2
+    private lateinit var tabLayout: TabLayout
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        libraryRecyclerView = view.findViewById(R.id.library_recycler_view)
-        libraryRecyclerView.adapter = libraryAdapter
-        libraryRecyclerView.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
+        tabLayout = view.findViewById(R.id.tab_layout)
+        viewPager = view.findViewById<ViewPager2>(R.id.view_page)
 
-        viewModel.libraryBooks.observe(viewLifecycleOwner) {books ->
-            libraryAdapter.updateLibraryList(books)
-        }
-
-        val searchView = view.findViewById<SearchView>(R.id.library_search_view)
-
-        // set up search bar/change listener to filter library by query
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
+        viewPager.adapter = LibraryPagerAdapter(requireActivity())
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "Local Library"
+                1 -> "Currently Reading"
+                else -> "Want to Read"
             }
-
-            override fun onQueryTextChange(query: String?): Boolean {
-                query?.let { queryString ->
-                    viewModel.getBookByTitleOrAuthor(queryString).observe(viewLifecycleOwner) { books ->
-                        libraryAdapter.updateLibraryList(books)
-                    }
-                }
-                return true
-            }
-        })
-    }
-
-    private fun onLibraryBookClick(book: LibraryBook) {
-        val action = LibraryFragmentDirections.navigateToBookDetails(book)
-        findNavController().navigate(action)
+        }.attach()
     }
 }
