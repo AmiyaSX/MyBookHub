@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".ui.BookDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/bookTitleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Book Title"
+                android:textSize="24sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/bookAuthorText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Author Name"
+                android:textSize="18sp"/>
+
+            <RatingBar
+                android:id="@+id/bookRatingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                android:layout_marginTop="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/pages_read_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="Pages read: 200/567"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="6dp"
+                    android:layout_marginEnd="8dp"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/delete_book_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:iconSize="24dp"
+                    app:icon="@drawable/baseline_delete_24"
+                    app:iconGravity="textStart"
+                    app:iconTint="@color/md_theme_light_error"
+                    style="@style/Widget.MaterialComponents.Button.TextButton.Icon"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/bookCoverImage"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_marginStart="8dp"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginVertical="8dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/notes_search_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/label_search_notes_hint"
+            android:background="@drawable/background_searchbar"
+            android:layout_margin="8dp"
+            app:iconifiedByDefault="false"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/add_note_button"/>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_note_button"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            app:icon="@drawable/add_book"
+            app:iconGravity="textTop"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:layout_constraintStart_toEndOf="@id/notes_search_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"/>
+
+</LinearLayout>

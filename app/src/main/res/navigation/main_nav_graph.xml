@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/library">
+
+    <!-- Library Fragment (Your Library) -->
+    <fragment
+        android:id="@+id/library"
+        android:name="com.example.mybookhub.ui.LibraryFragment"
+        android:label="@string/label_library">
+        <!-- Define valid actions from Library Fragment -->
+        <action
+            android:id="@+id/navigate_to_notes_manage"
+            app:destination="@id/manage_notes" />
+    </fragment>
+
+    <!-- Browse Books Fragment -->
+    <fragment
+        android:id="@+id/browse_books"
+        android:name="com.example.mybookhub.ui.BrowseBooksFragment"
+        android:label="@string/label_browse_books" />
+
+    <!-- Book Detail Fragment -->
+    <fragment
+        android:id="@+id/book_details"
+        android:name="com.example.mybookhub.ui.BookDetailFragment"
+        android:label="@string/label_book_detail"
+        tools:layout="@layout/fragment_book_detail">
+        <argument
+            android:name="bookDetails"
+            app:argType="com.example.mybookhub.data.LibraryBook"/>
+    </fragment>
+
+    <!-- Search Fragment -->
+    <fragment
+        android:id="@+id/search_fragment"
+        android:name="com.example.mybookhub.ui.BrowseBooksFragment"
+        android:label="@string/label_browse_books" />
+
+
+    <!-- Notes Manage Fragment -->
+    <fragment
+        android:id="@+id/manage_notes"
+        android:name="com.example.mybookhub.ui.NotesManageFragment"
+        android:label="@string/label_manage_notes">
+        <argument
+            android:name="bookDetails"
+            app:argType="com.example.mybookhub.data.LibraryBook"/>
+    </fragment>
+
+    <action
+        android:id="@+id/navigate_to_book_details"
+        app:destination="@id/book_details">
+        <argument
+            android:name="bookDetails"
+            app:argType="com.example.mybookhub.data.LibraryBook" />
+    </action>
+    <!-- Define the action to navigate to manage_notes -->
+    <action
+        android:id="@+id/navigate_to_manage_notes"
+        app:destination="@id/manage_notes" />
+</navigation>
