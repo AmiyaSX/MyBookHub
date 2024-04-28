@@ -1,4 +1,4 @@
-package com.example.mybookhub.ui
+package com.example.mybookhub.ui.browse
 
 import android.content.Intent
 import android.net.Uri
@@ -12,8 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookhub.R
 import com.example.mybookhub.data.Book
-import com.example.mybookhub.data.BookSearch
-import com.example.mybookhub.data.LibraryBook
+import com.example.mybookhub.bean.BookSearch
+import com.example.mybookhub.bean.LibraryBook
+import com.example.mybookhub.ui.vm.LibraryViewModel
+import com.example.mybookhub.ui.adapter.RecentSearchAdapter
+import com.example.mybookhub.ui.adapter.BrowseBooksAdapter
+import com.example.mybookhub.ui.vm.BookSearchViewModel
 import com.example.mybookhub.util.LoadingStatus
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.progressindicator.CircularProgressIndicator

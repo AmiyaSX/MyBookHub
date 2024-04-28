@@ -1,11 +1,11 @@
-package com.example.mybookhub.ui
+package com.example.mybookhub.ui.vm
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.mybookhub.data.BookSearch
+import com.example.mybookhub.bean.BookSearch
 import com.example.mybookhub.data.BookSearchRepository
 import com.example.mybookhub.data.OpenLibraryService
 import com.example.mybookhub.util.LoadingStatus

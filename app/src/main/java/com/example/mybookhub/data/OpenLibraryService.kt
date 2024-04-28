@@ -1,5 +1,6 @@
 package com.example.mybookhub.data
 
+import com.example.mybookhub.bean.BookSearch
 import retrofit2.Response
 import retrofit2.Retrofit
 import com.squareup.moshi.Moshi

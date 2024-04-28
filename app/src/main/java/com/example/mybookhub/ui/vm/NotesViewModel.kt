@@ -1,11 +1,11 @@
-package com.example.mybookhub.ui
+package com.example.mybookhub.ui.vm
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.mybookhub.data.AppDatabase
-import com.example.mybookhub.data.Note
+import com.example.mybookhub.data.db.AppDatabase
+import com.example.mybookhub.bean.Note
 import com.example.mybookhub.data.NotesRepository
 import kotlinx.coroutines.launch
 class NotesViewModel(application: Application) : AndroidViewModel(application) {

@@ -1,10 +1,12 @@
-package com.example.mybookhub.data
+package com.example.mybookhub.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.mybookhub.R
+import com.example.mybookhub.bean.LibraryBook
+import com.example.mybookhub.bean.Note
 
 @Database(entities = [Note::class, LibraryBook::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {

@@ -8,7 +8,7 @@
     <!-- Library Fragment (Your Library) -->
     <fragment
         android:id="@+id/library"
-        android:name="com.example.mybookhub.ui.LibraryFragment"
+        android:name="com.example.mybookhub.ui.library.LibraryFragment"
         android:label="@string/label_library">
         <!-- Define valid actions from Library Fragment -->
         <action
@@ -19,7 +19,7 @@
     <!-- Browse Books Fragment -->
     <fragment
         android:id="@+id/browse_books"
-        android:name="com.example.mybookhub.ui.BrowseBooksFragment"
+        android:name="com.example.mybookhub.ui.browse.BrowseBooksFragment"
         android:label="@string/label_browse_books" />
 
     <!-- Book Detail Fragment -->
@@ -30,24 +30,21 @@
         tools:layout="@layout/fragment_book_detail">
         <argument
             android:name="bookDetails"
-            app:argType="com.example.mybookhub.data.LibraryBook"/>
+            app:argType="com.example.mybookhub.bean.LibraryBook"/>
     </fragment>
 
     <!-- Search Fragment -->
     <fragment
         android:id="@+id/search_fragment"
-        android:name="com.example.mybookhub.ui.BrowseBooksFragment"
+        android:name="com.example.mybookhub.ui.browse.BrowseBooksFragment"
         android:label="@string/label_browse_books" />
 
 
     <!-- Notes Manage Fragment -->
     <fragment
         android:id="@+id/manage_notes"
-        android:name="com.example.mybookhub.ui.NotesManageFragment"
+        android:name="com.example.mybookhub.ui.note.NotesManageFragment"
         android:label="@string/label_manage_notes">
-        <argument
-            android:name="bookDetails"
-            app:argType="com.example.mybookhub.data.LibraryBook"/>
     </fragment>
 
     <action
@@ -55,10 +52,6 @@
         app:destination="@id/book_details">
         <argument
             android:name="bookDetails"
-            app:argType="com.example.mybookhub.data.LibraryBook" />
+            app:argType="com.example.mybookhub.bean.LibraryBook" />
     </action>
-    <!-- Define the action to navigate to manage_notes -->
-    <action
-        android:id="@+id/navigate_to_manage_notes"
-        app:destination="@id/manage_notes" />
 </navigation>

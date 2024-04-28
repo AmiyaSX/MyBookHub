@@ -18,8 +18,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookhub.R
+import com.example.mybookhub.bean.LibraryBook
+import com.example.mybookhub.bean.Note
 import com.example.mybookhub.data.*
+import com.example.mybookhub.data.db.AppDatabase
 import com.example.mybookhub.databinding.FragmentBookDetailBinding
+import com.example.mybookhub.ui.adapter.BookDetailAdapter
+import com.example.mybookhub.ui.vm.BookDetailViewModel
+import com.example.mybookhub.ui.vm.NotesViewModel
 
 class BookDetailFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.mybookhub.data
+package com.example.mybookhub.bean
 
 import androidx.room.Entity
 import androidx.room.ForeignKey

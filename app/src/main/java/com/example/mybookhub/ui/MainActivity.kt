@@ -18,7 +18,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupWithNavController
 import com.example.mybookhub.R
-import com.example.mybookhub.data.LibraryBook
+import com.example.mybookhub.bean.LibraryBook
+import com.example.mybookhub.ui.library.LibraryFragmentDirections
+import com.example.mybookhub.ui.vm.LibraryViewModel
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {

@@ -1,5 +1,6 @@
-package com.example.mybookhub.data
+package com.example.mybookhub.bean
 
+import com.example.mybookhub.data.Book
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 

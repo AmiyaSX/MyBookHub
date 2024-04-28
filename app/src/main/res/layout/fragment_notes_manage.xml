@@ -6,13 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".ui.NotesManageFragment">
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginVertical="8dp"/>
+    tools:context=".ui.note.NotesManageFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

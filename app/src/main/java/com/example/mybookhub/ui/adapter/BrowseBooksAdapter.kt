@@ -1,4 +1,4 @@
-package com.example.mybookhub.ui
+package com.example.mybookhub.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View

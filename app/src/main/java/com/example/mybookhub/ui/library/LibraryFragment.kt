@@ -1,4 +1,4 @@
-package com.example.mybookhub.ui
+package com.example.mybookhub.ui.library
 
 import android.os.Bundle
 import android.view.View
@@ -9,8 +9,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.navigation.fragment.findNavController
 import com.example.mybookhub.R
-import com.example.mybookhub.data.LibraryBook
-import com.example.mybookhub.data.Note
+import com.example.mybookhub.bean.LibraryBook
+import com.example.mybookhub.bean.Note
+import com.example.mybookhub.ui.vm.LibraryViewModel
+import com.example.mybookhub.ui.vm.NotesViewModel
+import com.example.mybookhub.ui.adapter.LibraryAdapter
 
 
 class LibraryFragment : Fragment(R.layout.fragment_library) {

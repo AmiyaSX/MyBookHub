@@ -1,6 +1,5 @@
-package com.example.mybookhub.data
+package com.example.mybookhub.bean
 
-import androidx.annotation.NonNull
 import androidx.room.Entity
 import java.io.Serializable
 

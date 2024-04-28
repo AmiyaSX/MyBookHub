@@ -1,6 +1,7 @@
 package com.example.mybookhub.data
 
-import androidx.lifecycle.asLiveData
+import com.example.mybookhub.bean.Note
+import com.example.mybookhub.data.db.NoteDao
 
 class NotesRepository (
     private val dao: NoteDao

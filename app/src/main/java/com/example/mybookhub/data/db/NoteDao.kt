@@ -1,10 +1,11 @@
-package com.example.mybookhub.data
+package com.example.mybookhub.data.db
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.mybookhub.bean.Note
 import kotlinx.coroutines.flow.Flow
 
 @Dao

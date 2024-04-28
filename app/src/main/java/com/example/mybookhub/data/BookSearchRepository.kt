@@ -1,10 +1,10 @@
 package com.example.mybookhub.data
 
 import android.util.Log
+import com.example.mybookhub.bean.BookSearch
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
 
 class BookSearchRepository(
     private val service: OpenLibraryService,

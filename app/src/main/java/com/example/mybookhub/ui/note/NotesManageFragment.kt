@@ -1,4 +1,4 @@
-package com.example.mybookhub.ui
+package com.example.mybookhub.ui.note
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

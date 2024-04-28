@@ -1,5 +1,8 @@
 package com.example.mybookhub.data
 
+import com.example.mybookhub.bean.LibraryBook
+import com.example.mybookhub.data.db.LibraryBookDao
+
 class LibraryRepository (
     private val dao: LibraryBookDao
 ) {
