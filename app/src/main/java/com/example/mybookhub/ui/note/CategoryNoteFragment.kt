@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mybookhub.R
@@ -21,6 +22,7 @@ import com.example.mybookhub.bean.NoteCategory
 import com.example.mybookhub.data.vm.NotesViewModel
 import com.example.mybookhub.databinding.FragmentCategoryNoteBinding
 import com.example.mybookhub.ui.adapter.NotesAdapter
+import kotlinx.coroutines.launch
 
 class CategoryNoteFragment : Fragment() {
     private var _binding: FragmentCategoryNoteBinding? = null
@@ -84,16 +86,19 @@ class CategoryNoteFragment : Fragment() {
             // save the note
             val noteTitle = noteTitleET.text.toString()
             val noteContent = noteContentET.text.toString()
-            notesViewModel.addNote(
-                Note(
-                    noteTitle,
-                    book.title,
-                    book.author,
-                    getString(R.string.note_category_placeholder),
-                    noteContent
+            lifecycleScope.launch {
+                notesViewModel.addNote(
+                    Note(
+                        id = 0,
+                        noteTitle,
+                        book.title,
+                        book.author,
+                        getString(R.string.note_category_placeholder),
+                        noteContent
+                    )
                 )
-            )
 
+            }
             dialog.dismiss()
         }
 

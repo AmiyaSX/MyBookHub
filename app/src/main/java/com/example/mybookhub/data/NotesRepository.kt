@@ -10,16 +10,18 @@ class NotesRepository (
     private val categoryDao: NoteCategoryDao
 ) {
     suspend fun insertNote(note: Note) = dao.insert(note)
-    suspend fun updateNote(note: Note) = dao.update(note)
+
+    suspend fun updateNote(id: Long, title: String, category: String, content: String) = dao.updateNote(id, title, category, content)
 
     suspend fun deleteNote(note: Note) = dao.delete(note)
 
-    suspend fun insertCategory(category: NoteCategory) = categoryDao.insert(category)
-    suspend fun updateCategory(category: NoteCategory) = categoryDao.update(category)
+    suspend fun insertCategory(category: NoteCategory): Long = categoryDao.insert(category)
+    suspend fun updateCategory(id: Long, tile: String, description: String) = categoryDao.updateCategory(id, tile, description)
 
     suspend fun deleteCategory(category: NoteCategory) = categoryDao.delete(category)
 
     fun getAllCategory() = categoryDao.getAllNoteCategories()
+
     fun getCategoryByTitle(title: String) = categoryDao.getCategoryByTitle(title)
 
     fun getNotesByBook(title: String, author: String) = dao.getNotesByBook(title, author)

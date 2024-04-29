@@ -6,8 +6,9 @@ import java.io.Serializable
 
 @Entity(tableName = "category")
 data class NoteCategory(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val id: Long = 0,
     var title: String,
     var description: String,
-
-    ) : Serializable
+    ) : Serializable {
+}

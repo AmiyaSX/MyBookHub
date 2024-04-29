@@ -8,6 +8,7 @@ import com.example.mybookhub.data.db.AppDatabase
 import com.example.mybookhub.bean.Note
 import com.example.mybookhub.bean.NoteCategory
 import com.example.mybookhub.data.NotesRepository
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 class NotesViewModel(application: Application) : AndroidViewModel(application) {
     private val repository = NotesRepository(
@@ -16,23 +17,22 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     val noteCategoryList = repository.getAllCategory().asLiveData()
-    fun addNote(note: Note) {
-        viewModelScope.launch {
+    suspend fun addNote(note: Note): Long {
+        return viewModelScope.async {
             repository.insertNote(note)
-        }
+        }.await()
     }
-    fun updateNote(note: Note, updateTitle: String, updateContent: String) {
-        val newNote = note.copy(title = updateTitle, content = updateContent)
+    fun updateNote(note: Note, updateTitle: String, updateCategory: String, updateContent: String) {
         viewModelScope.launch {
-            repository.updateNote(newNote)
+            repository.updateNote(note.id, updateTitle, updateCategory, updateContent)
         }
     }
     fun updateNoteCategory(note: Note, updateCategory: String) {
-        val newNote = note.copy(category = updateCategory)
         viewModelScope.launch {
-            repository.updateNote(newNote)
+            repository.updateNote(note.id, note.title, updateCategory, note.content)
         }
     }
+
     fun updateNotesCategory(category: String, updateCategory: String) {
         val notes = getNotesByCategory(category).value
         if (notes != null) {
@@ -52,15 +52,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun addCategory(category: NoteCategory) {
-        viewModelScope.launch {
+    suspend fun addCategory(category: NoteCategory): Long {
+        return viewModelScope.async {
             repository.insertCategory(category)
-        }
+        }.await()
     }
      fun updateCategory(category: NoteCategory, updateTitle: String, updateDescription: String) {
-         val newCategory = category.copy(title = updateTitle, description = updateDescription)
          viewModelScope.launch {
-            repository.updateCategory(newCategory)
+            repository.updateCategory(category.id, updateTitle, updateDescription)
         }
     }
 

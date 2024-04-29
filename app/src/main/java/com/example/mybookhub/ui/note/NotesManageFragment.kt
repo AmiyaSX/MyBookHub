@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,7 @@ import com.example.mybookhub.data.vm.NotesViewModel
 import com.example.mybookhub.databinding.FragmentNotesManageBinding
 import com.example.mybookhub.ui.adapter.NoteCategoryAdapter
 import com.google.android.material.progressindicator.CircularProgressIndicator
+import kotlinx.coroutines.launch
 
 
 class NotesManageFragment : Fragment() {
@@ -48,12 +50,15 @@ class NotesManageFragment : Fragment() {
 
         viewModel.noteCategoryList.observe(viewLifecycleOwner) { categoryList ->
             if(categoryList.isEmpty()) {
-                viewModel.addCategory(
-                    NoteCategory(
-                        "Default",
-                        ""
+                lifecycleScope.launch{
+                    viewModel.addCategory(
+                        NoteCategory(
+                            id = 0,
+                            "Default",
+                            ""
+                        )
                     )
-                )
+                }
             }
             categoryAdapter.updateCategoryList(categoryList)
         }
@@ -109,19 +114,19 @@ class NotesManageFragment : Fragment() {
             btnSave.setOnClickListener {
                 val categoryTitle = categoryTitleET.text.toString()
                 val categoryDescription = categoryDescriptionET.text.toString()
-
-                viewModel.addCategory(
-                    NoteCategory(
-                        categoryTitle,
-                        categoryDescription
+                lifecycleScope.launch{
+                    viewModel.addCategory(
+                        NoteCategory(
+                            id = 0,
+                            categoryTitle,
+                            categoryDescription
+                        )
                     )
-                )
-
+                }
                 dialog.dismiss()
             }
             btnDelete.visibility = View.INVISIBLE
         }
-
 
         btnCancel.setOnClickListener { dialog.dismiss() }
 
