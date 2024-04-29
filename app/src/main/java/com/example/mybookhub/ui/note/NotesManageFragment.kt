@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -25,7 +26,7 @@ class NotesManageFragment : Fragment() {
     private var _binding: FragmentNotesManageBinding? = null
     private val binding get() = _binding!!
     private val viewModel: NotesViewModel by viewModels()
-    private val categoryAdapter = NoteCategoryAdapter(emptyList(), ::onCategoryClick)
+    private val categoryAdapter = NoteCategoryAdapter(emptyList(), ::onCategoryClick, ::onCategoryLongClick)
     private lateinit var categoryRecyclerView: RecyclerView
     private lateinit var categoryList: List<NoteCategory>
     private lateinit var loadingIndicator: CircularProgressIndicator
@@ -46,6 +47,14 @@ class NotesManageFragment : Fragment() {
         categoryRecyclerView.layoutManager = GridLayoutManager(context, 2, RecyclerView.VERTICAL, false)
 
         viewModel.noteCategoryList.observe(viewLifecycleOwner) { categoryList ->
+            if(categoryList.isEmpty()) {
+                viewModel.addCategory(
+                    NoteCategory(
+                        "Default",
+                        ""
+                    )
+                )
+            }
             categoryAdapter.updateCategoryList(categoryList)
         }
 
@@ -59,6 +68,11 @@ class NotesManageFragment : Fragment() {
         findNavController().navigate(action)
     }
 
+    private fun onCategoryLongClick(category: NoteCategory) {
+        showCategoryDialog(category)
+    }
+
+
     private fun showCategoryDialog(noteCategory: NoteCategory?) {
         val dialogView = layoutInflater.inflate(R.layout.dialog_create_note_category, null)
         val dialog = AlertDialog.Builder(requireContext())
@@ -67,34 +81,50 @@ class NotesManageFragment : Fragment() {
 
         val categoryTitleET = dialogView.findViewById<EditText>(R.id.note_category_title)
         val categoryDescriptionET = dialogView.findViewById<EditText>(R.id.note_category_description)
-
-        // if a note is clicked on, populate title and content
+        val btnDelete = dialogView.findViewById<Button>(R.id.delete)
+        val btnCancel = dialogView.findViewById<Button>(R.id.cancel)
+        val btnSave = dialogView.findViewById<Button>(R.id.save)
+        // if a category is clicked on, populate title and content
         if (noteCategory != null) {
             categoryTitleET.setText(noteCategory.title)
             categoryDescriptionET.setText(noteCategory.description)
+            btnDelete.setOnClickListener {
+                val notes = viewModel.getNotesByCategory(noteCategory.title).value
+                if (notes != null) {
+                    for (note in notes) {
+                        note.category = "Default"
+                    }
+                }
+                viewModel.deleteCategory(noteCategory)
+                dialog.dismiss()
+            }
+
+            btnSave.setOnClickListener {
+                viewModel.getCategoryByTitle(noteCategory.title).value
+                viewModel.updateCategory(noteCategory, categoryTitleET.text.toString(), categoryDescriptionET.text.toString() )
+
+                dialog.dismiss()
+            }
+        } else {
+            btnSave.setOnClickListener {
+                val categoryTitle = categoryTitleET.text.toString()
+                val categoryDescription = categoryDescriptionET.text.toString()
+
+                viewModel.addCategory(
+                    NoteCategory(
+                        categoryTitle,
+                        categoryDescription
+                    )
+                )
+
+                dialog.dismiss()
+            }
+            btnDelete.visibility = View.INVISIBLE
         }
 
-        val btnCancel = dialogView.findViewById<Button>(R.id.cancel)
-        val btnSave = dialogView.findViewById<Button>(R.id.save)
 
         btnCancel.setOnClickListener { dialog.dismiss() }
 
-        btnSave.setOnClickListener {
-            // save the note
-            val categoryTitle = categoryTitleET.text.toString()
-            val categoryDescription = categoryDescriptionET.text.toString()
-
-            viewModel.addCategory(
-                NoteCategory(
-                    categoryTitle,
-                    categoryDescription
-                )
-            )
-
-            dialog.dismiss()
-        }
-
         dialog.show()
     }
-
 }

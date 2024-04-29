@@ -1,6 +1,7 @@
 package com.example.mybookhub.ui
 
 import android.app.AlertDialog
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.widget.SearchView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import androidx.fragment.app.viewModels
@@ -49,6 +51,7 @@ class BookDetailFragment : Fragment() {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -162,9 +165,6 @@ class BookDetailFragment : Fragment() {
             // save the note
             val noteTitle = noteTitleET.text.toString()
             val noteContent = noteContentET.text.toString()
-
-            // create note and add to db. using a placeholder category for now as we don't have time to implement this feature
-            // TODO: implement note categories (place, people, plot, etc.)
             notesViewModel.addNote(
                 Note(
                     noteTitle,
@@ -208,8 +208,6 @@ class BookDetailFragment : Fragment() {
             if (pagesRead.toIntOrNull() != book.pagesRead ||
                 totalPages.toIntOrNull() != book.pageCount) {
 
-
-                //TODO: fix db logic so we don't need so many checks/conversions
                 if (totalPages.isEmpty())
                     totalPages = book.pageCount.toString()
 

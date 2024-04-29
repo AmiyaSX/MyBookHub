@@ -18,4 +18,8 @@ interface NoteCategoryDao {
     @Query("SELECT * FROM category")
     fun getAllNoteCategories() : Flow<List<NoteCategory>>
 
+    @Query("SELECT * FROM category where title = :title")
+    fun getCategoryByTitle(title: String) : Flow<NoteCategory>
+
+
 }
