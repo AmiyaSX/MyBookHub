@@ -22,6 +22,7 @@ data class Note(
     val title: String,
     val bookTitle: String, // foreign key
     val bookAuthor: String, // foreign key
-    var category: String,
-    val content: String
+    val category: String,
+    val content: String,
+    val date: String
 )

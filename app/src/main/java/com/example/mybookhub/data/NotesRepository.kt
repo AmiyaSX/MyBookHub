@@ -11,7 +11,7 @@ class NotesRepository (
 ) {
     suspend fun insertNote(note: Note) = dao.insert(note)
 
-    suspend fun updateNote(id: Long, title: String, category: String, content: String) = dao.updateNote(id, title, category, content)
+    suspend fun updateNote(id: Long, title: String, category: String, content: String, date: String) = dao.updateNote(id, title, category, content, date)
 
     suspend fun deleteNote(note: Note) = dao.delete(note)
 

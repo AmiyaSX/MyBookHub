@@ -23,7 +23,7 @@ class NotesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.book_note_item, parent, false)
+            .inflate(R.layout.category_note_item, parent, false)
         return ViewHolder(view, onNoteClick)
     }
 
@@ -37,6 +37,8 @@ class NotesAdapter(
     ) : RecyclerView.ViewHolder(itemView) {
         private lateinit var currentNote: Note
         private val noteTitleTV = itemView.findViewById<TextView>(R.id.book_note)
+        private val noteContentTV = itemView.findViewById<TextView>(R.id.note_content)
+        private val noteDateTV = itemView.findViewById<TextView>(R.id.note_date)
 
         init {
             itemView.setOnClickListener{
@@ -46,6 +48,8 @@ class NotesAdapter(
         fun bind(note: Note) {
             currentNote = note
             noteTitleTV.text = currentNote.title
+            noteContentTV.text = currentNote.content
+            noteDateTV.text = currentNote.date
         }
     }
 }

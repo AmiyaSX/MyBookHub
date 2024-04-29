@@ -32,6 +32,8 @@ import com.example.mybookhub.data.vm.BookDetailViewModel
 import com.example.mybookhub.data.vm.NotesViewModel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BookDetailFragment : Fragment() {
 
@@ -145,6 +147,8 @@ class BookDetailFragment : Fragment() {
         val newCategoryET = dialogView.findViewById<EditText>(R.id.new_category_edit_text)
         val noteContentET = dialogView.findViewById<EditText>(R.id.note_content)
 
+        val sdf = SimpleDateFormat("dd MMM, yyyy - HH:mm")
+
         // Initialize spinner
         val categorySpinner = dialogView.findViewById<Spinner>(R.id.category_spinner)
         val categoryAdapter = CategoryAdapter(requireContext(), android.R.layout.simple_spinner_item)
@@ -200,6 +204,7 @@ class BookDetailFragment : Fragment() {
                     }
                     selectedCategory = newCategory
                 }
+                val date: String = sdf.format(Date())
                 lifecycleScope.launch {
                     notesViewModel.addNote(
                         Note(
@@ -208,7 +213,8 @@ class BookDetailFragment : Fragment() {
                             book.title,
                             book.author,
                             selectedCategory ?: getString(R.string.note_category_placeholder),
-                            noteContent
+                            noteContent,
+                            date
                         )
                     )
                 }
@@ -231,11 +237,13 @@ class BookDetailFragment : Fragment() {
                     }
                     selectedCategory = newCategory
                 }
+                val date: String = sdf.format(Date())
                 notesViewModel.updateNote(
-                        note,
-                        noteTitle,
+                    note,
+                    noteTitle,
                     selectedCategory ?: getString(R.string.note_category_placeholder),
-                        noteContent
+                    noteContent,
+                    date
                 )
                 dialog.dismiss()
             }
@@ -312,13 +320,11 @@ class BookDetailFragment : Fragment() {
         confirmButton.setOnClickListener {
             // remove observer to prevent app crash
             viewModel.getBookDetails(book.title, book.author).removeObservers(viewLifecycleOwner)
-
             //delete book from db (notes cascade delete automatically)
             viewModel.removeBook(
                 book.title,
                 book.author
             )
-
             // navigate back to the library (clear backwards nav first so you can't go back
             // to the book details page of the deleted book)
             findNavController().popBackStack(R.id.library, false)

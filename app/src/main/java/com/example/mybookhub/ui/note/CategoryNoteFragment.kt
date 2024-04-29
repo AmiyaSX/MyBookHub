@@ -14,6 +14,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.mybookhub.R
 import com.example.mybookhub.bean.LibraryBook
 import com.example.mybookhub.bean.Note
@@ -23,6 +24,8 @@ import com.example.mybookhub.databinding.FragmentCategoryNoteBinding
 import com.example.mybookhub.ui.CategoryAdapter
 import com.example.mybookhub.ui.adapter.NotesAdapter
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CategoryNoteFragment : Fragment() {
     private var _binding: FragmentCategoryNoteBinding? = null
@@ -44,7 +47,7 @@ class CategoryNoteFragment : Fragment() {
         // notes recycler view
         notesRecyclerView = view.findViewById(R.id.note_recycler_view)
         notesRecyclerView.adapter = notesAdapter
-        notesRecyclerView.layoutManager = LinearLayoutManager(context)
+        notesRecyclerView.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
 
         category = arguments?.getSerializable("noteCategory") as NoteCategory
         notesViewModel.getNotesByCategory(category.title).observe(viewLifecycleOwner) { notes ->
@@ -67,6 +70,7 @@ class CategoryNoteFragment : Fragment() {
         val categoryAdapter = CategoryAdapter(requireContext(), android.R.layout.simple_spinner_item)
         categoryAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         categorySpinner.adapter = categoryAdapter
+        val sdf = SimpleDateFormat("dd MMM, yyyy - HH:mm")
         // Set default category
         val defaultCategory = "Default"
         selectedCategory = defaultCategory
@@ -117,6 +121,7 @@ class CategoryNoteFragment : Fragment() {
                     }
                     selectedCategory = newCategory
                 }
+                val date: String = sdf.format(Date())
                 lifecycleScope.launch {
                     notesViewModel.addNote(
                         Note(
@@ -125,7 +130,8 @@ class CategoryNoteFragment : Fragment() {
                             book.title,
                             book.author,
                             selectedCategory ?: getString(R.string.note_category_placeholder),
-                            noteContent
+                            noteContent,
+                            date
                         )
                     )
                 }
@@ -148,11 +154,13 @@ class CategoryNoteFragment : Fragment() {
                     }
                     selectedCategory = newCategory
                 }
+                val date: String = sdf.format(Date())
                 notesViewModel.updateNote(
                     note,
                     noteTitle,
                     selectedCategory ?: getString(R.string.note_category_placeholder),
-                    noteContent
+                    noteContent,
+                    date
                 )
                 dialog.dismiss()
             }

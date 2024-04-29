@@ -10,7 +10,7 @@ import com.example.mybookhub.bean.LibraryBook
 import com.example.mybookhub.bean.Note
 import com.example.mybookhub.bean.NoteCategory
 
-@Database(entities = [Note::class, LibraryBook::class, NoteCategory::class], version = 3)
+@Database(entities = [Note::class, LibraryBook::class, NoteCategory::class], version = 4)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun noteDao(): NoteDao
     abstract fun libraryBookDao(): LibraryBookDao

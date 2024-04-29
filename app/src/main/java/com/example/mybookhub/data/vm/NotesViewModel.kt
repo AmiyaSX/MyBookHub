@@ -22,14 +22,14 @@ class NotesViewModel(application: Application) : AndroidViewModel(application) {
             repository.insertNote(note)
         }.await()
     }
-    fun updateNote(note: Note, updateTitle: String, updateCategory: String, updateContent: String) {
+    fun updateNote(note: Note, updateTitle: String, updateCategory: String, updateContent: String, updateDate: String) {
         viewModelScope.launch {
-            repository.updateNote(note.id, updateTitle, updateCategory, updateContent)
+            repository.updateNote(note.id, updateTitle, updateCategory, updateContent, updateDate)
         }
     }
     fun updateNoteCategory(note: Note, updateCategory: String) {
         viewModelScope.launch {
-            repository.updateNote(note.id, note.title, updateCategory, note.content)
+            repository.updateNote(note.id, note.title, updateCategory, note.content, note.date)
         }
     }
 

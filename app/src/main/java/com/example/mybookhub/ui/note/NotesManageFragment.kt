@@ -97,7 +97,7 @@ class NotesManageFragment : Fragment() {
                 val notes = viewModel.getNotesByCategory(noteCategory.title).value
                 if (notes != null) {
                     for (note in notes) {
-                        note.category = "Default"
+                        viewModel.updateNoteCategory(note, "Default")
                     }
                 }
                 viewModel.deleteCategory(noteCategory)
