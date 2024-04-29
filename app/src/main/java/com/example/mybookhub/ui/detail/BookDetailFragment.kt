@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -140,7 +141,6 @@ class BookDetailFragment : Fragment() {
         val dialog = AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .create()
-        val categoryList = notesViewModel.noteCategoryList.value
         val noteTitleET = dialogView.findViewById<EditText>(R.id.note_title)
         val newCategoryET = dialogView.findViewById<EditText>(R.id.new_category_edit_text)
         val noteContentET = dialogView.findViewById<EditText>(R.id.note_content)
@@ -153,7 +153,6 @@ class BookDetailFragment : Fragment() {
         // Set default category
         val defaultCategory = "Default"
         selectedCategory = defaultCategory
-        categoryAdapter.add(defaultCategory)
         // Observe category list
         notesViewModel.noteCategoryList.observe(viewLifecycleOwner) { categories ->
             categories?.let {
@@ -185,13 +184,7 @@ class BookDetailFragment : Fragment() {
 
         btnCancel.setOnClickListener { dialog.dismiss() }
         // If new category is entered, add it to the database
-        if (newCategoryET.text.isNotEmpty()) {
-            val newCategory = newCategoryET.text.toString()
-            lifecycleScope.launch {
-                notesViewModel.addCategory(NoteCategory(id = 0, newCategory, ""))
-            }
-            selectedCategory = newCategory
-        }
+
         // remove delete note button if there is no note, otherwise set click listener
         if (note == null) {
             btnDelete.visibility = View.GONE
@@ -199,6 +192,14 @@ class BookDetailFragment : Fragment() {
                 // save the note
                 val noteTitle = noteTitleET.text.toString()
                 val noteContent = noteContentET.text.toString()
+                if (newCategoryET.text.isNotEmpty()) {
+                    val newCategory = newCategoryET.text.toString()
+                    Log.d("new Category", newCategory)
+                    lifecycleScope.launch {
+                        notesViewModel.addCategory(NoteCategory(id = 0, newCategory, ""))
+                    }
+                    selectedCategory = newCategory
+                }
                 lifecycleScope.launch {
                     notesViewModel.addNote(
                         Note(
@@ -222,6 +223,14 @@ class BookDetailFragment : Fragment() {
                 // save the note
                 val noteTitle = noteTitleET.text.toString()
                 val noteContent = noteContentET.text.toString()
+                if (newCategoryET.text.isNotEmpty()) {
+                    val newCategory = newCategoryET.text.toString()
+                    Log.d("new Category", newCategory)
+                    lifecycleScope.launch {
+                        notesViewModel.addCategory(NoteCategory(id = 0, newCategory, ""))
+                    }
+                    selectedCategory = newCategory
+                }
                 notesViewModel.updateNote(
                         note,
                         noteTitle,
