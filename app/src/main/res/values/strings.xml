@@ -17,6 +17,8 @@
     <string name="label_library">Your Library</string>
     <string name="label_browse_books">Browse Books</string>
     <string name="label_manage_notes">Manage Notes</string>
+    <string name="label_category_notes">Note Category</string>
+
     <string name="label_search_books_hint">Search books…</string>
     <string name="label_search_library_hint">Search library…</string>
     <string name="label_search_notes_hint">Search notes…</string>

@@ -20,17 +20,8 @@ import com.example.mybookhub.data.vm.NotesViewModel
 class LocalLibraryFragment : Fragment(R.layout.fragment_local_library) {
 
     private val viewModel: LibraryViewModel by viewModels()
-    private val notesViewModel: NotesViewModel by viewModels()
     private val libraryAdapter = LibraryAdapter(emptyList(), ::onLibraryBookClick)
     private lateinit var libraryRecyclerView: RecyclerView
-
-    private lateinit var books: List<LibraryBook>
-    private var notes: MutableList<Note> = mutableListOf()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

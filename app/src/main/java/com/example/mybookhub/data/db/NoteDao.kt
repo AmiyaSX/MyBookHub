@@ -18,6 +18,9 @@ interface NoteDao {
     @Query("SELECT * FROM notes WHERE bookTitle = :title AND bookAuthor = :author")
     fun getNotesByBook(title: String, author: String) : Flow<List<Note>>
 
+    @Query("SELECT * FROM notes WHERE category = :category")
+    fun getNotesByCategory(category: String) : Flow<List<Note>>
+
     @Query("SELECT * FROM notes")
     fun getAllNotes() : Flow<List<Note>>
 

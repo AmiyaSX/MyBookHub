@@ -11,9 +11,6 @@
         android:name="com.example.mybookhub.ui.library.LibraryFragment"
         android:label="@string/label_library">
         <!-- Define valid actions from Library Fragment -->
-        <action
-            android:id="@+id/navigate_to_notes_manage"
-            app:destination="@id/manage_notes" />
     </fragment>
 
     <!-- Browse Books Fragment -->
@@ -39,13 +36,26 @@
         android:name="com.example.mybookhub.ui.browse.BrowseBooksFragment"
         android:label="@string/label_browse_books" />
 
+    <fragment
+        android:id="@+id/note_category"
+        android:name="com.example.mybookhub.ui.note.CategoryNoteFragment"
+        android:label="@string/label_category_notes">
+        <argument
+            android:name="noteCategory"
+            app:argType="com.example.mybookhub.bean.NoteCategory"/>
+    </fragment>
 
     <!-- Notes Manage Fragment -->
     <fragment
         android:id="@+id/manage_notes"
         android:name="com.example.mybookhub.ui.note.NotesManageFragment"
         android:label="@string/label_manage_notes">
+        <action
+            android:id="@+id/navigate_to_note_category"
+            app:destination="@id/note_category" />
     </fragment>
+
+
 
     <action
         android:id="@+id/navigate_to_book_details"
@@ -54,4 +64,14 @@
             android:name="bookDetails"
             app:argType="com.example.mybookhub.bean.LibraryBook" />
     </action>
+
+    <action
+        android:id="@+id/navigate_to_note_category"
+        app:destination="@id/note_category">
+        <argument
+            android:name="noteCategory"
+            app:argType="com.example.mybookhub.bean.NoteCategory" />
+    </action>
+
+
 </navigation>

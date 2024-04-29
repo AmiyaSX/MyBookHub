@@ -35,7 +35,7 @@ class BookDetailFragment : Fragment() {
     private val viewModel: BookDetailViewModel by viewModels {
         val database = AppDatabase.getInstance(requireContext())
         val libraryRepository = LibraryRepository(database.libraryBookDao())
-        val notesRepository = NotesRepository(database.noteDao())
+        val notesRepository = NotesRepository(database.noteDao(), database.noteCategoryDao())
         BookDetailViewModelFactory(libraryRepository, notesRepository)
     }
 

@@ -23,11 +23,11 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/add_note_button"/>
+            app:layout_constraintEnd_toStartOf="@+id/add_category_button"/>
 
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/add_note_button"
+            android:id="@+id/add_category_button"
             android:layout_width="38dp"
             android:layout_height="38dp"
             app:icon="@drawable/add_book"
@@ -41,7 +41,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notesRecyclerView"
+        android:id="@+id/category_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"/>
