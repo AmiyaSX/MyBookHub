@@ -7,11 +7,21 @@
 3）建立书籍、Web资源、读后感等的关联，实现较复杂的横向、纵向查询。  
 
 ## 课题任务要求
-1）基于安卓(Android)平台； 
-2）使用一款轻量级数据库, Room；
+1）基于安卓(Android)平台；  
+
+
+2）使用一款轻量级数据库, Room；  
+
+
 3) 关联OpenLibrary API，数据的拉取和展示；
-4) Firebase Cloud Firestore，
+
+
+4) Firebase Cloud Firestore;
+
+   
 5) Authentication
+
+  
 6) Recommendation System
 
 ## 系统设计和实现
